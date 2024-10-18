@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Ball Game</title>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="300"></canvas>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+
+    var ballX = 200;
+    var ballY = 150;
+    var ballRadius = 10;
+    var ballSpeedX = 2;
+    var ballSpeedY = 2;
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, ballRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.closePath();
+
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        if (ballX + ballRadius > canvas.width || ballX - ballRadius < 0) {
+            ballSpeedX = -ballSpeedX;
+            ctx.fillStyle = "red";
+        }
+        if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
+            ballSpeedY = -ballSpeedY;
+            ctx.fillStyle = "green";
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Ball Game with Geolocation</title>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="300"></canvas>
+<button id="showLocationButton">Show My Location</button>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    var ballX = 200;
+    var ballY = 150;
+    var ballRadius = 10;
+    var ballSpeedX = 2;
+    var ballSpeedY = 2;
+
+    function draw() {
+        // ... rest of your game logic ...
+
+        requestAnimationFrame(draw);
+    }
+
+    function showLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var latitude = position.coords.latitude;
+
+                var longitude = position.coords.longitude;
+
+                alert("Your latitude is: " + latitude
+                    + "\nYour longitude is: " + longitude);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    var showLocationButton = document.getElementById("showLocationButton");
+    showLocationButton.addEventListener("click", showLocation);
+
+    draw();
+</script>
+</body>
+</html>

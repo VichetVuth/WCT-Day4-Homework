@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Color Selector</title>
+</head>
+<body>
+<div id="theme-container">
+    <button id="red-button">Red</button>
+    <button id="blue-button">Blue</button>
+    <button id="green-button">Green</button>
+</div>
+
+<script>
+    const themeContainer = document.getElementById('theme-container');
+    const redButton = document.getElementById('red-button');
+    const blueButton = document.getElementById('blue-button');
+    const greenButton = document.getElementById('green-button');
+
+    // Load the saved theme color from local storage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        themeContainer.style.backgroundColor = savedTheme;
+    }
+
+    // Handle button clicks to change the theme color
+    redButton.addEventListener('click', () => {
+        themeContainer.style.backgroundColor = 'red';
+        localStorage.setItem('theme', 'red');
+    });
+
+    blueButton.addEventListener('click', () => {
+        themeContainer.style.backgroundColor = 'blue';
+        localStorage.setItem('theme', 'blue');
+    });
+
+    greenButton.addEventListener('click', () => {
+        themeContainer.style.backgroundColor = 'green';
+        localStorage.setItem('theme', 'green');
+    });
+</script>
+</body>
+</html>

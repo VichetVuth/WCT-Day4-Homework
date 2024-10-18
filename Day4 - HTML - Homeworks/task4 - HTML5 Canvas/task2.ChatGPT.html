@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Drawing App</title>
+    <style>
+        #myCanvas {
+            border: 1px solid black;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+<h1>Basic Drawing App</h1>
+
+<!-- Canvas element for drawing -->
+<canvas id="myCanvas" width="600" height="400"></canvas>
+
+<script>
+    // Get the canvas and context
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+    var drawing = false;
+
+    // Function to start drawing
+    function startDrawing(e) {
+        drawing = true;
+        draw(e);
+    }
+
+    // Function to stop drawing
+    function stopDrawing() {
+        drawing = false;
+        ctx.beginPath(); // Reset the drawing path
+    }
+
+    // Function to draw on the canvas
+    function draw(e) {
+        if (!drawing) return;
+
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round'; // Makes smooth round edges
+        ctx.strokeStyle = 'black'; // Color of the drawing
+
+        // Draw based on the mouse position
+        ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    }
+
+    // Event listeners for mouse actions
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+</script>
+</body>
+</html>
